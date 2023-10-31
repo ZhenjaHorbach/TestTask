@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
-  button: {width: '70%'},
+  button: {width: '100%'},
   passwordButton: {width: '20%', marginTop: 5},
   passwordInput: {width: '75%'},
   wrapper: {

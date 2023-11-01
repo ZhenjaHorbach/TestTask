@@ -8,7 +8,16 @@ export const styles = StyleSheet.create({
     borderColor: colors.majorelle,
     borderWidth: 2,
     paddingHorizontal: 8,
-    marginBottom: 10,
     borderRadius: 5,
+  },
+  container: {
+    paddingVertical: 5,
+  },
+  showButton: {width: '20%'},
+  secureInput: {width: '75%'},
+  secureContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
 });

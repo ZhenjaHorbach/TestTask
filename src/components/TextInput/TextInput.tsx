@@ -1,5 +1,7 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {View, TextInput as Input, Text, TextStyle} from 'react-native';
+import {Button} from '../Button';
+import {ErrorMessage} from '../ErrorMessage';
 import {styles} from './styles';
 
 interface TextInputProps {
@@ -7,7 +9,9 @@ interface TextInputProps {
   value: string;
   onChangeText: (text: string) => void;
   onBlur?: () => void;
-  secureTextEntry?: boolean;
+  isSecureInput?: boolean;
+  errorMessage?: string;
+  disableErrorMessage?: boolean;
   style?: TextStyle;
 }
 
@@ -16,19 +20,45 @@ export const TextInput: FC<TextInputProps> = ({
   value,
   onChangeText,
   onBlur = () => {},
-  secureTextEntry = false,
+  errorMessage,
+  disableErrorMessage,
+  isSecureInput,
   style,
 }) => {
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
-    <View>
+    <View style={styles.container}>
       <Text>{label}:</Text>
-      <Input
-        value={value}
-        onChangeText={onChangeText}
-        onBlur={onBlur}
-        secureTextEntry={secureTextEntry}
-        placeholder={label}
-        style={[styles.input, style]}
+      {isSecureInput && (
+        <View style={styles.secureContainer}>
+          <Input
+            value={value}
+            onChangeText={onChangeText}
+            onBlur={onBlur}
+            secureTextEntry={showPassword}
+            placeholder={label}
+            style={[styles.input, styles.secureInput, style]}
+          />
+          <Button
+            title={showPassword ? 'Hide' : 'Show'}
+            onPress={() => setShowPassword(!showPassword)}
+            style={styles.showButton}
+          />
+        </View>
+      )}
+      {!isSecureInput && (
+        <Input
+          value={value}
+          onChangeText={onChangeText}
+          onBlur={onBlur}
+          placeholder={label}
+          style={[styles.input, style]}
+        />
+      )}
+      <ErrorMessage
+        errorMessage={errorMessage}
+        disableErrorMessage={disableErrorMessage}
       />
     </View>
   );

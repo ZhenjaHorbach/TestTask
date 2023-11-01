@@ -5,4 +5,5 @@ export const colors = {
   mauve2: '#E5A4F9ff',
   seasalt: '#F5F8F7ff',
   white: '#FFF',
+  red: '#E15554',
 };

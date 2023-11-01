@@ -1,30 +1,33 @@
 import {useState} from 'react';
 import {NavigationProp} from '../../navigation/types';
 import {useNavigation} from '@react-navigation/native';
+import * as yup from 'yup';
 
 interface Credentials {
   email: string;
   password: string;
 }
 
+const defaultValueForm = {
+  email: '',
+  password: '',
+};
+
+const schema = yup.object().shape({
+  email: yup.string().email('Invalid email').required('Email is required'),
+  password: yup.string().required('Password is required'),
+});
+
 export const useLogin = () => {
   const navigation = useNavigation<NavigationProp<'Login'>>();
-  const [showPassword, setShowPassword] = useState(false);
-  const [credentials, setCredentials] = useState<Credentials>({
-    email: '',
-    password: '',
-  });
+  const [credentials, setCredentials] = useState(defaultValueForm);
 
-  const onSubmit = (values: {email: string; password: string}) => {
+  const onSubmit = (values: Credentials) => {
     setCredentials(values);
     navigation.navigate('Home');
   };
 
-  const onShowPassword = (state: boolean) => {
-    setShowPassword(state);
-  };
-
-  const onChangeCredentials = (key: 'email' | 'password', value: string) => {
+  const onChangeCredentials = (key: keyof Credentials, value: string) => {
     setCredentials({
       ...credentials,
       [key]: value,
@@ -33,9 +36,8 @@ export const useLogin = () => {
 
   return {
     onSubmit,
-    onShowPassword,
     onChangeCredentials,
-    showPassword,
-    credentials,
+    defaultValueForm,
+    schema,
   };
 };

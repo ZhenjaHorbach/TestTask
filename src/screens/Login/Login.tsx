@@ -5,21 +5,17 @@ import {TextInput} from '../../components/TextInput';
 import {Button} from '../../components/Button';
 import {ScreenWrapper} from '../../components/ScreenWrapper';
 import {useLogin} from './useLogin';
-import {styles} from './styles';
 
 export const Login = () => {
-  const {
-    showPassword,
-    onShowPassword,
-    onSubmit,
-    credentials,
-    onChangeCredentials,
-  } = useLogin();
+  const {onSubmit, onChangeCredentials, defaultValueForm, schema} = useLogin();
 
   return (
-    <ScreenWrapper style={styles.wrapper}>
-      <Formik initialValues={{email: '', password: ''}} onSubmit={onSubmit}>
-        {({handleChange, handleSubmit, values}) => (
+    <ScreenWrapper>
+      <Formik
+        initialValues={defaultValueForm}
+        onSubmit={onSubmit}
+        validationSchema={schema}>
+        {({handleChange, handleSubmit, values, errors}) => (
           <View>
             <TextInput
               label="Email"
@@ -28,31 +24,19 @@ export const Login = () => {
                 onChangeCredentials('email', value);
                 handleChange('email')(value);
               }}
+              errorMessage={errors.email}
             />
-            <View style={styles.passwordContainer}>
-              <View style={styles.passwordInput}>
-                <TextInput
-                  label="Password"
-                  value={values.password}
-                  onChangeText={value => {
-                    onChangeCredentials('password', value);
-                    handleChange('password')(value);
-                  }}
-                  secureTextEntry={!showPassword}
-                />
-              </View>
-              <Button
-                title={showPassword ? 'Hide' : 'Show'}
-                onPress={() => onShowPassword(!showPassword)}
-                style={styles.passwordButton}
-              />
-            </View>
-            <Button
-              title="Submit"
-              disabled={!(credentials.email && credentials.password)}
-              onPress={() => handleSubmit()}
-              style={styles.button}
+            <TextInput
+              label="Password"
+              value={values.password}
+              errorMessage={errors.password}
+              onChangeText={value => {
+                onChangeCredentials('password', value);
+                handleChange('password')(value);
+              }}
+              isSecureInput
             />
+            <Button title="Submit" onPress={() => handleSubmit()} />
           </View>
         )}
       </Formik>

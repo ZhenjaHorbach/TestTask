@@ -1,5 +1,8 @@
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
+<p align="center">
+  <img src="https://github.com/ZhenjaHorbach/TestTask/assets/68128028/9f0f7dc9-50b3-4a54-815c-36c115c67b5c" alt="Image description">
+</p>
 
 ## Step 1: Clone the Repository and Install Dependencies
 First, you need to clone the project repository and install the necessary dependencies.

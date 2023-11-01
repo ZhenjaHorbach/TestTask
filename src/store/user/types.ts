@@ -2,6 +2,8 @@ export type InitialState = {
   fullName: string;
   email: string;
   password: string;
+  repeatPassword: string;
   dateOfBirth: string;
-  getPromotionalMaterial: boolean;
+  agreeTerms: string;
+  agreePromo: string;
 };

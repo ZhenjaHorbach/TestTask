@@ -24,6 +24,7 @@ export const useLogin = () => {
 
   const onSubmit = (values: Credentials) => {
     setCredentials(values);
+
     navigation.navigate('Home');
   };
 

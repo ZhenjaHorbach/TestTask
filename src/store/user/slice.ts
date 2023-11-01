@@ -8,14 +8,24 @@ const initialState = {
   fullName: '',
   email: '',
   password: '',
+  repeatPassword: '',
   dateOfBirth: '',
-  getPromotionalMaterial: false,
+  agreeTerms: '',
+  agreePromo: '',
 } as InitialState;
 
 const userSlice = createSlice({
   name: User,
   initialState,
-  reducers: {},
+  reducers: {
+    updateUser: (state, action) => {
+      return {...state, ...action.payload};
+    },
+    clearUser: () => {
+      return initialState;
+    },
+  },
 });
 
+export const {updateUser, clearUser} = userSlice.actions;
 export const userReducer = userSlice.reducer;

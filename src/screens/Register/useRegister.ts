@@ -3,6 +3,8 @@ import {NavigationProp} from '../../navigation/types';
 import {useNavigation} from '@react-navigation/native';
 import * as yup from 'yup';
 import {MAX_AGE, MIN_AGE, DEFAULT_AGE} from './constants';
+import {useUpdateUser} from '../../store/user/hooks';
+import {useAddUser} from '../../store/users/hooks';
 
 interface UserInfo {
   fullName: string;
@@ -64,12 +66,19 @@ export const useRegister = () => {
   const [isDatePickerVisible, setDatePickerVisible] = useState(false);
   const [userInfo, setUserInfo] = useState(defaultValueForm);
 
+  const updateUser = useUpdateUser();
+  const addUser = useAddUser();
+
   const onSubmit = (values: UserInfo) => {
-    setUserInfo(values);
+    updateUser(values);
+    addUser({
+      email: values.email,
+      password: values.password,
+    });
 
     navigation.reset({
       index: 1,
-      routes: [{name: 'Welcome'}, {name: 'Login'}],
+      routes: [{name: 'Welcome'}, {name: 'Home'}],
     });
   };
 

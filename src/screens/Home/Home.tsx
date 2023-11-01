@@ -6,11 +6,12 @@ import {styles} from './styles';
 import {useHome} from './useHome';
 
 export const Home = () => {
-  const {onStartAgain} = useHome();
+  const {onStartAgain, user} = useHome();
 
   return (
     <ImageBackground style={styles.container} source={images.ocean}>
       <View style={styles.content}>
+        <Text>Hello {user.fullName}</Text>
         <Text>WELCOME TO HOME SCREEN</Text>
         <Button
           title="Start again"

@@ -8,8 +8,7 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 ## Step 1: Clone the Repository and Install Dependencies
 First, you need to clone the project repository and install the necessary dependencies.
 
-bash
-Copy code
+```bash
 # Clone the repository using Git
 git clone https://github.com/ZhenjaHorbach/TestTask.git
 cd TestTask
@@ -19,6 +18,7 @@ npm install
 
 # OR using Yarn
 yarn install
+```
 
 ## Step 2: Start the Metro Server
 

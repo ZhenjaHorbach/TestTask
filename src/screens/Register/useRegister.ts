@@ -11,6 +11,7 @@ interface UserInfo {
   repeatPassword: string;
   dateOfBirth: string;
   agreeTerms: string;
+  agreePromo: string;
 }
 
 const schema = yup.object().shape({
@@ -55,6 +56,7 @@ const defaultValueForm = {
     new Date().getDate(),
   ).toDateString(),
   agreeTerms: 'false',
+  agreePromo: 'false',
 };
 
 export const useRegister = () => {

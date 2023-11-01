@@ -1,15 +1,16 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, ScrollView} from 'react-native';
 import {TextInput} from '../../components/TextInput';
 import {Button} from '../../components/Button';
 import {ErrorMessage} from '../../components/ErrorMessage';
-import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import {Checkbox} from '../../components/Checkbox';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import {Formik} from 'formik';
 import {ScreenWrapper} from '../../components/ScreenWrapper';
 import {useRegister} from './useRegister';
 
 import {styles} from './styles';
+import {colors} from '../../ui';
 
 export const Register = () => {
   const {
@@ -29,7 +30,7 @@ export const Register = () => {
         validationSchema={schema}
         onSubmit={onSubmit}>
         {({handleChange, handleSubmit, values, errors}) => (
-          <View>
+          <ScrollView>
             <TextInput
               label="Full Name"
               onChangeText={value => {
@@ -85,27 +86,33 @@ export const Register = () => {
               <ErrorMessage errorMessage={errors.dateOfBirth} />
               <Button
                 title="Pick a Date"
+                style={{backgroundColor: colors.mauve}}
                 onPress={() => onShowDatePicker(true)}
               />
             </View>
             <View style={styles.pickerContainer}>
-              <BouncyCheckbox
-                size={25}
-                textComponent={
-                  <Text style={styles.bouncyCheckboxText}>
-                    I agree to Terms and Conditions
-                  </Text>
-                }
-                fillColor="green"
+              <Checkbox
+                checkboxText="I agree to Terms and Conditions"
                 onPress={checked => {
                   onChangeUserInfo('agreeTerms', checked.toString());
                   handleChange('agreeTerms')(checked.toString());
                 }}
+                errorMessage={errors.agreeTerms}
               />
-              <ErrorMessage errorMessage={errors.agreeTerms} />
+            </View>
+            <View style={styles.pickerContainer}>
+              <Checkbox
+                checkboxText="I agree to receive ads and promotional material on the given
+																email address"
+                onPress={checked => {
+                  onChangeUserInfo('agreePromo', checked.toString());
+                  handleChange('agreePromo')(checked.toString());
+                }}
+                disableErrorMessage
+              />
             </View>
             <Button title="Register" onPress={() => handleSubmit()} />
-          </View>
+          </ScrollView>
         )}
       </Formik>
     </ScreenWrapper>

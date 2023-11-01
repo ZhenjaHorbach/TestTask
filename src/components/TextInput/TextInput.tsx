@@ -36,7 +36,7 @@ export const TextInput: FC<TextInputProps> = ({
             value={value}
             onChangeText={onChangeText}
             onBlur={onBlur}
-            secureTextEntry={showPassword}
+            secureTextEntry={!showPassword}
             placeholder={label}
             style={[styles.input, styles.secureInput, style]}
           />

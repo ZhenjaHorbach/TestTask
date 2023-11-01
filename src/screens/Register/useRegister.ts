@@ -66,7 +66,11 @@ export const useRegister = () => {
 
   const onSubmit = (values: UserInfo) => {
     setUserInfo(values);
-    navigation.navigate('Home');
+
+    navigation.reset({
+      index: 1,
+      routes: [{name: 'Welcome'}, {name: 'Login'}],
+    });
   };
 
   const onShowDatePicker = (state: boolean) => {
